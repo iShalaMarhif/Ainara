@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumple Ainara</title>
+    <style>
+        /* Estilos generales */
+        body {
+            background: #67e1ffe0;
+            color: #6d1a34;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        /* Contenedor principal */
+        .contador-container {
+            text-align: center;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: #ffffff;
+            max-width: 480px;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            color: #c13f60;
+        }
+        /* Estilos para el temporizador */
+        .contador {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .contador div {
+            padding: 10px;
+            background: #ffebf0;
+            border-radius: 8px;
+            color: #c13f60;
+            min-width: 80px;
+            margin-right: 10px;
+        }
+        .label {
+            font-size: 0.75em;
+            color: #8d4155;
+        }
+        /* Pie de página romántico */
+        footer {
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #b02a4a;
+        }
+        footer span {
+            font-weight: bold;
+            color: #880000;
+        }
+        /* Animación de latido */
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(0.9);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+        .heartbeat {
+            animation: heartbeat 1s infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor principal -->
+    <div class="contador-container">
+        <h1>Cumpleaños Ainara ❤️</h1>
+        
+        <!-- Contador con días, horas, minutos, segundos -->
+        <div class="contador">
+            <div>
+                <div id="dias" class="heartbeat">0</div>
+                <div class="label">Días</div>
+            </div>
+            <div>
+                <div id="horas" class="heartbeat">0</div>
+                <div class="label">Horas</div>
+            </div>
+            <div>
+                <div id="minutos" class="heartbeat">0</div>
+                <div class="label">Minutos</div>
+            </div>
+            <div>
+                <div id="segundos" class="heartbeat">0</div>
+                <div class="label">Segundos</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie de página con mensaje romántico -->
+    <footer>
+        <p>Falta poco para tus <span>18</span> 🤭</p>
+    </footer>
+
+    <!-- Script para el contador de cuenta regresiva -->
+    <script>
+        function iniciarCuentaRegresiva() {
+            // Fecha objetivo (27 de diciembre, 23:59:59)
+            const fechaObjetivo = new Date("December 27, 2024 23:59:59").getTime();
+
+            // Actualización del contador cada segundo
+            const intervalo = setInterval(() => {
+                const ahora = new Date().getTime();
+                const distancia = fechaObjetivo - ahora;
+
+                // Cálculo de tiempo
+                const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+                const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+                const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+                // Actualización del DOM
+                document.getElementById("dias").innerHTML = dias;
+                document.getElementById("horas").innerHTML = horas;
+                document.getElementById("minutos").innerHTML = minutos;
+                document.getElementById("segundos").innerHTML = segundos;
+
+                // Si el contador llega a cero, se detiene
+                if (distancia < 0) {
+                    clearInterval(intervalo);
+                    document.querySelector(".contador-container h1").innerHTML = "¡Es Nuestro Día Especial!";
+                    document.querySelector(".contador").style.display = "none";
+                    document.querySelector("footer p").innerHTML = "¡Llegó el momento de celebrar nuestro amor! ❤️";
+                }
+            }, 1000);
+        }
+
+        // Inicia el contador
+        iniciarCuentaRegresiva();
+    </script>
+
+</body>
+</html>
